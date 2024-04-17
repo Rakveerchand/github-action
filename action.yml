@@ -1,0 +1,22 @@
+name: An action to invoke AWS lambda by CoffeeBeansLabs
+description: A Github action for invoke AWS lambda
+
+inputs:
+  lambda-name:
+    description: Name of the lambda
+    required: true
+  parameters:
+    description: 'Provide parameters as json or .env file format with each pair for one line.'
+    required: false
+  params-file:
+    description: 'Write params to a json file and provide the file path from github workspace root.'
+    required: false
+
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    INPUT_LAMBDA_NAME: ${{ inputs.lambda-name }}
+    INPUT_PARAMS: ${{ inputs.parameters }}
+    INPUT_PARAMS_FILE_PATH: ${{ inputs.params-file }}
+
